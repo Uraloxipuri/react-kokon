@@ -1,0 +1,162 @@
+/* src/styles.css */
+
+/* Basic reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Body styling */
+body {
+  background-color: white;
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+/* Container for circles */
+#circle-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* Styling for circles */
+.circle {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  border: 1px solid blue;
+  border-radius: 50%;
+  background-color: white;
+  margin: 10px;
+  cursor: pointer;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Pale blue background when name is entered */
+.circle.pale-blue {
+  background-color: #e0f7fa;
+}
+
+/* Red background when microphone is active (blinking) */
+.circle.blinking-red {
+  animation: blink-red 2s infinite;
+}
+
+@keyframes blink-red {
+  0% {
+    background-color: red;
+  }
+  50% {
+    background-color: #e0f7fa;
+  }
+  100% {
+    background-color: red;
+  }
+}
+
+/* Text inside the circle */
+.circle-text {
+  text-align: center;
+  pointer-events: auto;
+  z-index: 2;
+  font-size: 1.2em;
+}
+
+/* Hover effect to show sectors */
+.circle:hover .circle-text {
+  opacity: 0.3;
+}
+
+/* Add input field styling */
+.circle-input {
+  position: absolute;
+  width: 80%;
+  border: none;
+  background: none;
+  text-align: center;
+  font-size: 1em;
+  outline: none;
+  z-index: 3;
+}
+
+/* Sector styling */
+.sector {
+  position: absolute;
+  width: 45%;
+  height: 45%;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(173, 216, 230, 0.5);
+  cursor: pointer;
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: bold;
+  border: 1px solid white;
+}
+
+/* Show sectors on hover */
+.circle.pale-blue:hover .sector {
+  display: flex;
+}
+.circle.pale-blue:hover .circle-text {
+  opacity: 0;
+}
+
+/* Positioning sectors */
+.sector.top-left {
+  top: 5%;
+  left: 5%;
+  border-top-left-radius: 50%;
+}
+
+.sector.top-right {
+  top: 5%;
+  right: 5%;
+  border-top-right-radius: 50%;
+}
+
+.sector.bottom-left {
+  bottom: 5%;
+  left: 5%;
+  border-bottom-left-radius: 50%;
+}
+
+.sector.bottom-right {
+  bottom: 5%;
+  right: 5%;
+  border-bottom-right-radius: 50%;
+}
+
+/* Sector labels */
+.sector span {
+  pointer-events: none;
+}
+
+/* Add-circle button */
+#add-circle {
+  width: 200px;
+  height: 200px;
+  font-size: 2em;
+  margin: 10px;
+  cursor: pointer;
+}
+
+/* Styling for login button */
+button {
+  font-size: 1.5em;
+  padding: 10px 20px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+/* Styling for logo */
+img {
+  width: 100px;
+  height: auto;
+  margin-bottom: 20px;
+}
