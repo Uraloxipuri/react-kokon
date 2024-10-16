@@ -1,11 +1,31 @@
 // src/LoginPage.js
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
+import { AuthContext } from './AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 function LoginPage() {
+  const { isAuthenticated } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      // Redirect authenticated users to the user interface
+      navigate('/user-interface');
+    }
+  }, [isAuthenticated, navigate]);
+
   const handleLogin = () => {
-    window.location.href =
-      'https://your-cognito-domain/login?client_id=your-client-id&response_type=code&scope=email+openid+profile&redirect_uri=your-redirect-uri/user-interface';
+    const clientId = process.env.REACT_APP_COGNITO_CLIENT_ID;
+    const redirectUri = process.env.REACT_APP_COGNITO_REDIRECT_URI;
+    const cognitoDomain = process.env.REACT_APP_COGNITO_DOMAIN;
+
+    window.location.href = `${cognitoDomain}/login?client_id=${clientId}&response_type=code&scope=email+openid+profile&redirect_uri=${redirectUri}`;
   };
+
+  if (isAuthenticated === null) {
+    // Show a loading indicator while checking authentication
+    return <div>Loading...</div>;
+  }
 
   return (
     <div>

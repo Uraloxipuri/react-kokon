@@ -1,7 +1,8 @@
+// src/Authentication.js
 export async function exchangeAuthCodeForTokens(authCode) {
-  const clientId = 'your-client-id'; // Replace with your actual Cognito App Client ID
-  const redirectUri = 'your-redirect-uri/user-interface'; // Replace with your actual redirect URI
-  const cognitoDomain = 'https://your-cognito-domain'; // Replace with your actual Cognito domain
+  const clientId = process.env.REACT_APP_COGNITO_CLIENT_ID;
+  const redirectUri = process.env.REACT_APP_COGNITO_REDIRECT_URI;
+  const cognitoDomain = process.env.REACT_APP_COGNITO_DOMAIN;
 
   const tokenUrl = `${cognitoDomain}/oauth2/token`;
 
@@ -28,31 +29,13 @@ export async function exchangeAuthCodeForTokens(authCode) {
       localStorage.setItem('access_token', tokens.access_token);
       localStorage.setItem('refresh_token', tokens.refresh_token);
 
-      // Remove the authorization code from the URL
-      window.history.replaceState({}, document.title, redirectUri);
-
-      // Now the user is authenticated, you can proceed
-      alert('Logged in successfully!');
+      return true; // Indicate success
     } else {
-      console.error(
-        'Failed to exchange authorization code for tokens:',
-        response.statusText
-      );
-      alert('Error during login, please try again.');
+      console.error('Failed to exchange authorization code for tokens:', response.statusText);
+      return false; // Indicate failure
     }
   } catch (error) {
     console.error('Error during token exchange:', error);
-  }
-}
-
-export function checkAuthentication() {
-  const idToken = localStorage.getItem('id_token');
-
-  if (!idToken) {
-    // Redirect to Cognito login
-    window.location.href =
-      'https://your-cognito-domain/login?client_id=your-client-id&response_type=code&scope=email+openid+profile&redirect_uri=your-redirect-uri/user-interface';
-  } else {
-    console.log('User is authenticated');
+    return false; // Indicate failure
   }
 }

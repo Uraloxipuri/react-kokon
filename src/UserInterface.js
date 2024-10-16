@@ -1,16 +1,24 @@
 // src/UserInterface.js
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
+import { AuthContext } from './AuthContext';
+import { useNavigate } from 'react-router-dom';
 import CircleContainer from './CircleContainer';
 
 function UserInterface() {
+  const { isAuthenticated } = useContext(AuthContext);
+  const navigate = useNavigate();
+
   useEffect(() => {
-    const idToken = localStorage.getItem('id_token');
-    if (!idToken) {
+    if (isAuthenticated === false) {
       // Redirect to login if not authenticated
-      window.location.href =
-        'https://your-cognito-domain/login?client_id=your-client-id&response_type=code&scope=email+openid+profile&redirect_uri=your-redirect-uri/user-interface';
+      navigate('/');
     }
-  }, []);
+  }, [isAuthenticated, navigate]);
+
+  if (isAuthenticated === null) {
+    // Show a loading indicator while checking authentication
+    return <div>Loading...</div>;
+  }
 
   return (
     <div>
