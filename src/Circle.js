@@ -1,4 +1,3 @@
-// src/Circle.js
 import React, { useState, useRef } from 'react';
 
 function Circle() {
@@ -113,7 +112,6 @@ function Circle() {
       ) : (
         <span className="circle-text">{name}</span>
       )}
-      {/* Sectors */}
       {isPaleBlue && (
         <>
           <div className="sector top-left" onClick={() => handleSectorAction('microphone')}>

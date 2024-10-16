@@ -1,4 +1,3 @@
-// src/Authentication.js
 export async function exchangeAuthCodeForTokens(authCode) {
   const clientId = 'your-client-id'; // Replace with your actual Cognito App Client ID
   const redirectUri = 'your-redirect-uri/user-interface'; // Replace with your actual redirect URI
@@ -35,7 +34,10 @@ export async function exchangeAuthCodeForTokens(authCode) {
       // Now the user is authenticated, you can proceed
       alert('Logged in successfully!');
     } else {
-      console.error('Failed to exchange authorization code for tokens:', response.statusText);
+      console.error(
+        'Failed to exchange authorization code for tokens:',
+        response.statusText
+      );
       alert('Error during login, please try again.');
     }
   } catch (error) {
