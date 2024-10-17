@@ -1,4 +1,5 @@
 // src/UserInterface.js
+
 import React, { useContext, useEffect } from 'react';
 import { AuthContext } from './AuthContext';
 import { useNavigate } from 'react-router-dom';

@@ -1,4 +1,3 @@
-// src/AuthContext.js
 import React, { createContext, useState, useEffect } from 'react';
 import { exchangeAuthCodeForTokens } from './Authentication';
 
@@ -15,7 +14,6 @@ export const AuthProvider = ({ children }) => {
       if (authCode) {
         const success = await exchangeAuthCodeForTokens(authCode);
         setIsAuthenticated(success);
-        // Remove the code from the URL
         window.history.replaceState({}, document.title, process.env.REACT_APP_COGNITO_REDIRECT_URI);
       } else {
         const idToken = localStorage.getItem('id_token');

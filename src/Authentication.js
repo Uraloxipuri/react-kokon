@@ -1,4 +1,3 @@
-// src/Authentication.js
 export async function exchangeAuthCodeForTokens(authCode) {
   const clientId = process.env.REACT_APP_COGNITO_CLIENT_ID;
   const redirectUri = process.env.REACT_APP_COGNITO_REDIRECT_URI;
